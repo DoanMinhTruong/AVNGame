@@ -4,8 +4,8 @@
 }
 body{
     background-image: url('./resized/background.jpg');
-    background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: contain;
 }
@@ -40,7 +40,27 @@ body{
 .item_fall{
     position: absolute;
     cursor: pointer;
+    width: 120px;
 }
 .invisible{
     opacity: 0.5    ;
+}
+
+@media only screen and (max-width: 1200px) {
+    .item_fall{
+        
+        width : 100px;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .item_fall{
+        
+        width : 90px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .item_fall{
+        
+        width : 75px;
+    }
 }

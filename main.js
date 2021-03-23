@@ -151,7 +151,6 @@ async function Fall(){
     item.loading = 'lazy'
     item.className = 'item_fall'
     item.src = products[rand_id]
-    item.style.width = '70px'
     item.style.left = rand_left + '%';
     item.style.transition = 'all 0.6s'
     board.appendChild(item)

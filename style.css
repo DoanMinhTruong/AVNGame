@@ -4,7 +4,8 @@
 }
 body{
     background-image: url('./resized/background.jpg');
-    overscroll-behavior: contain;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: contain;
 }
 .count3{
     position: absolute;

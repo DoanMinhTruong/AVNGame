@@ -209,7 +209,15 @@ async function Fall(){
     item.addEventListener('dragend' , function(e){
         drag(e);
     })
-    item.addEventListener('touchmove' , function(e){
+
+    item.addEventListener('touchmove', function(e){
+        e.preventDefault();
+        item.style.left = e.clientX
+        item.style.top = e.clientY
+
+    })
+
+    item.addEventListener('touchend' , function(e){
                 drag(e);
     })
 

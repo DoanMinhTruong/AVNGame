@@ -198,8 +198,7 @@ async function Fall(){
             e.preventDefault()
             item.remove();
             score++;
-            var sc = document.querySelector('.score')
-            sc.innerText = score;
+            
         }else{
             item.classList.remove('invisible')
         }
@@ -210,7 +209,7 @@ async function Fall(){
     item.addEventListener('dragend' , function(e){
         drag(e);
     })
-    item.addEventListener('touchend' , function(e){
+    item.addEventListener('touchmove' , function(e){
                 drag(e);
     })
 

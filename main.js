@@ -182,9 +182,7 @@ async function Fall(){
     item.addEventListener('dragstart' , function(){
         item.classList.add('invisible')
     })
-    item.addEventListener('touchstart',function(){
-        item.classList.add('invisible')
-    })
+    
 
 
 
@@ -203,22 +201,29 @@ async function Fall(){
             item.classList.remove('invisible')
         }
     }
-
-
-
     item.addEventListener('dragend' , function(e){
         drag(e);
     })
-
-    item.addEventListener('touchmove', function(e){
-        e.preventDefault();
-        item.style.left = e.clientX
-        item.style.top = e.clientY
-
+    
+    item.addEventListener('touchstart',function(){
+        item.classList.add('invisible')
     })
-
     item.addEventListener('touchend' , function(e){
-                drag(e);
+        var el = e.changedTouches[0]
+        const cart = document.getElementById('cart_img')
+        var x1 = cart.getBoundingClientRect().x
+        var x2 = x1 + cart.getBoundingClientRect().width
+        var y1 = cart.getBoundingClientRect().y
+        var y2 = y1 + cart.getBoundingClientRect().width
+        if(el.clientX >= x1-(item.x* (20/100)) && el.clientX <= x2+(item.x* (20/100))  && el.clientY >= y1-(item.y* (20/100)) && el.clientY <= y2+(item.y* (20/100))){
+            if(e.cancelable)
+                e.preventDefault()
+            item.remove();
+            score++;
+            
+        }else{
+            item.classList.remove('invisible')
+        }
     })
 
 

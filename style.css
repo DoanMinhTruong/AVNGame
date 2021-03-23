@@ -1,0 +1,42 @@
+*{
+    padding : 0;
+    margin : 0;
+}
+body{
+    background-image: url('./resized/background.jpg');
+}
+.count3{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 30%;
+    font-size: 140px;
+}
+.board{
+    display: none;
+}
+.board_timer{
+    position: absolute;
+    width: 30%;
+    left: 35%;
+}
+#cart{
+    text-align: center;
+    position: absolute;
+    bottom: 3%;
+}
+
+@media only screen and (max-width: 992px) {
+    .board_timer{
+        position: absolute;
+        width: 50%;
+        left: 26%;
+    }
+}
+.item_fall{
+    position: absolute;
+    cursor: pointer;
+}
+.invisible{
+    opacity: 0;
+}

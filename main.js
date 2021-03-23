@@ -56,13 +56,6 @@ function startGame(){
                                 Bạn đã thất bại mini game với số điểm <h2>`+score+ `/15</h2>  Hãy cố gắng lần sau!
                             </div>
                 `
-                
-                // const result_title = document.createElement('div')
-                // result_title.className = 'result_title'
-                // result_title.innerText = 'RẤT TIẾC CHƯA VƯỢT QUA MINI GAME'
-                // const result_content = document.createElement('div')
-                // result_content.className = 'result_content'
-                // result_content.innerHTML = 'Bạn đã thất bại mini game với số điểm <h2>'+score+'/15</h2>  Chúc bạn cố gắng lần sau!'
                 const again = document.createElement('button')
 
                 again.className = 'btn btn-info'
@@ -102,28 +95,13 @@ function startGame(){
                     <div class='result_footer fw-bold'>Hãy lưu lại và mua sắm nhé!</div>
 
                 `
-                // const result_title = document.createElement('div')
-                // result_title.className = 'result_title '
-                // result_title.innerText = 'CHÚC MỪNG'
-                // const result_content = document.createElement('div')
-                // result_content.className = 'result_content'
-                // result_content.innerHTML = 'Bạn đã chiến thắng mini game với số điểm <h2>'+score+'/15</h2>  Phần thưởng cho bạn là mã giảm giá 20k dành cho đơn hàng trên 100k tại gian hàng chính hảng của Ajinomoto trên Tiki, Shopee, Lazada'
-                // const voucher = document.createElement('div')
-                // voucher.className = 'voucher'
-                // voucher.innerText = 'VR1208'
-                // const result_footer = document.createElement('div')
-                // result_footer.innerText = 'Hãy lưu lại mã và mua sắm nhé!'
-                // result_footer.className = 'result_footer'
+                
                 const conti = document.createElement('button')
                 conti.id = 'conti'
                 conti.className = 'btn btn-primary'
                 conti.innerText = 'Tiếp tục tham quan'
                 conti.style.margin = '4%'
 
-                // result.appendChild(result_title)
-                // result.appendChild(result_content)
-                // result.appendChild(voucher)
-                // result.appendChild(result_footer)
                 result_content.appendChild(conti)
                 result.appendChild(result_content)
             }

@@ -4,6 +4,8 @@
 }
 body{
     background-image: url('./resized/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: contain;
 }

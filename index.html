@@ -11,7 +11,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="game h-100 overflow-hidden">
+    <div id="game h-100 d-block overflow-hidden">
         <div class='row justify-content-center'>
             <div class="notice mt-5 p-3 col-md-6 col-xs-10 position-absolute bg-light text-center">
                 <div class="notice_title h2 text-danger">
@@ -34,27 +34,24 @@
         </div>
 
 
-        <div class="board row bg-light h-100 ">
-
-            <div class="board_timer text-white  bg-danger  text-center rounded-pill row">
-                <div class="col border-end">  
+        <div class="board h-100 row ">
+            <div class="board_timer text-dark  bg-white  text-center row">
+                <div class="col-6 ">  
                     <div class="timer_title">
-                        THỜI GIAN CÒN LẠI
+                        THỜI GIAN:
                     </div>
                     <div class="timer h1">20</div>
                 </div>
-                <div class="col">
+                <div class="col-6 border-start">
                     <div class="score_title">
-                        Điểm của bạn
+                        Điểm:
                     </div>
                     <div class="score h1">0</div>
                 </div>
             </div>
 
-
-
             <div id='cart'>
-                <img id='cart_img'src="./resized/cart.png" width="150px">
+                <img id='cart_img' src="./resized/cart.png" width="150px">
             </div>
 
         </div>

@@ -44,7 +44,7 @@ function startGame(){
             board.style.display = 'none';
             removeElementsByClass('item_fall')
             const result = document.createElement('div')
-            result.className = 'result mx-3 row justify-content-center'
+            result.className = 'result mt-3 mx-3 row justify-content-center'
             if(score < 15){
                 const result_content = document.createElement('div')
                 result_content.className = 'p-3 col-md-6 col-xs-10 position-absolute bg-white text-center'
@@ -76,6 +76,9 @@ function startGame(){
                 SoundLose();
             
                 again.addEventListener('click' ,function(){
+                    score = 0;
+                    last_score.innerText = '0'
+                    timer.innerText = '20'
                     result.style.display= 'none'
                     var allcart = document.querySelectorAll('.cart_image')
                     allcart.forEach(e => {
@@ -152,7 +155,7 @@ function SoundCart(){
 async function Fall(){
 
     var rand_id = Math.floor(Math.random() * 76)
-    var rand_left = Math.floor(Math.random() * 75) + 15
+    var rand_left = Math.floor(Math.random() * 50) + 25
     var rand_speed = (Math.random() * 10) + 5   
     var wait = Math.random() * 50000 + 500 
 
@@ -229,14 +232,16 @@ async function Fall(){
         var x2 = x1 + cart.getBoundingClientRect().width
         var y1 = cart.getBoundingClientRect().y
         var y2 = y1 + cart.getBoundingClientRect().width
-        if(el.clientX >= x1-(item.x* (20/100)) && el.clientX <= x2+(item.x* (20/100))  && el.clientY >= y1-(item.y* (20/100)) && el.clientY <= y2+(item.y* (20/100))){
-            if(e.cancelable)
+        if(e.cancelable)
                 e.preventDefault()
+        if(el.clientX >= x1-(item.x* (20/100)) && el.clientX <= x2+(item.x* (20/100))  && el.clientY >= y1-(item.y* (20/100)) && el.clientY <= y2+(item.y* (20/100))){
+            
             item.remove();
             ChongAnh()
             SoundCart();
 
             score++;
+            last_score.innerText = score;
             
         }else{
             item.classList.remove('invisible')
@@ -257,7 +262,8 @@ async function Fall(){
         var int = setInterval(  function() {
             item.style.top = i + 'px';
             i+=speed;
-            if(i >= 700) {
+            var hei = document.documentElement.clientHeight
+            if(i >= hei - (hei * 25 /100)) {
                 clearInterval(int)
                 item.remove()
             } 

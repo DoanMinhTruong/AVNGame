@@ -49,7 +49,7 @@ body{
 .cart_image{
     z-index: 2;
     position: absolute;
-    width: 35px;
+    width: 3.5%;
 }
 .invisible{
     opacity: 0.5 ;
@@ -57,9 +57,10 @@ body{
 
 @media only screen and (max-width: 1200px) {
     .item_fall{
-        
+
         width : 100px;
     }
+    
 }
 @media only screen and (max-width: 992px) {
     .item_fall{
@@ -71,6 +72,9 @@ body{
         width: 40%;
         left: 30%;
     }
+    .cart_image{
+        width: 5%;
+    }
 }
 @media only screen and (max-width: 768px) {
     .item_fall{
@@ -80,5 +84,8 @@ body{
         position: absolute;
         width: 70%;
         left: 17%;
+    }
+    .cart_image{
+        width: 8%;
     }
 }

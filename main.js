@@ -4,7 +4,7 @@ const close = document.getElementById('close')
 const timer = document.querySelector('.timer')
 const again = document.getElementById('again')
 const start = document.getElementById('start')
-
+const last_score = document.querySelector('.score')
 function removeElementsByClass(className){
     var elements = document.getElementsByClassName(className);
     while(elements.length > 0){
@@ -73,10 +73,14 @@ function startGame(){
                 // result.appendChild(result_content)
                 result_content.appendChild(again)
                 result_content.appendChild(conti)
-            
+                SoundLose();
             
                 again.addEventListener('click' ,function(){
                     result.style.display= 'none'
+                    var allcart = document.querySelectorAll('.cart_image')
+                    allcart.forEach(e => {
+                        e.remove()
+                    });
                     startGame();
                 })
                 result.appendChild(result_content)
@@ -104,6 +108,8 @@ function startGame(){
 
                 result_content.appendChild(conti)
                 result.appendChild(result_content)
+                SoundWin();
+
             }
                 document.body.appendChild(result)
 
@@ -124,27 +130,30 @@ for (let i = 0 ; i <= 76 ; i++)
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-async function ItemFallDown(i , item , speed ){
-    
-    var int = setInterval(  function() {
-        item.style.top = i + '%';
-        i+=speed;
-        if(i >= 85) {
-            clearInterval(int)
-            item.remove()
-        } 
-
-    }, 70);
-}
 
 
 //
 
+function SoundWin(){
+    const Win = new Audio('./sounds/wow.mp3')
+    Win.play();
+}
+function SoundLose(){
+    const Lose = new Audio('./sounds/lose.mp3')
+    Lose.play();
+}
+function SoundCart(){
+    const Cart = new Audio('./sounds/bounce.mp3')
+    Cart.play();
+}
+//
+
 
 async function Fall(){
+
     var rand_id = Math.floor(Math.random() * 76)
     var rand_left = Math.floor(Math.random() * 75) + 15
-    var rand_speed = (Math.random() * 0.1) + 1   
+    var rand_speed = (Math.random() * 10) + 5   
     var wait = Math.random() * 50000 + 500 
 
     var item = document.createElement('img')
@@ -152,7 +161,7 @@ async function Fall(){
     item.className = 'item_fall'
     item.src = products[rand_id]
     item.style.left = rand_left + '%';
-    item.style.transition = 'all 0.6s'
+    item.style.transition = 'all 0.25s'
     board.appendChild(item)
 
     item.draggable = 'true'
@@ -161,6 +170,16 @@ async function Fall(){
     })
     
 
+    const allCart = document.getElementById('cart')
+
+    function ChongAnh(){
+        var t_img = document.createElement('img')
+        t_img.src = item.src 
+        t_img.className = 'cart_image'
+        var r_img = Math.floor(Math.random() * 45) - 45
+        t_img.style.transform = 'rotate(' + r_img + 'deg)';
+        allCart.appendChild(t_img)
+    }
 
 
     function drag(e){
@@ -172,7 +191,10 @@ async function Fall(){
         if(e.clientX >= x1-(item.x* (20/100)) && e.clientX <= x2+(item.x* (20/100))  && e.clientY >= y1-(item.y* (20/100)) && e.clientY <= y2+(item.y* (20/100))){
             e.preventDefault()
             item.remove();
+            ChongAnh()
+            SoundCart();
             score++;
+            last_score.innerText = score;
             
         }else{
             item.classList.remove('invisible')
@@ -180,11 +202,26 @@ async function Fall(){
     }
     item.addEventListener('dragend' , function(e){
         drag(e);
+
     })
     
-    item.addEventListener('touchstart',function(){
-        item.classList.add('invisible')
+
+
+    item.addEventListener('touchstart',function(e){
+        e.preventDefault()
+        item.addEventListener('touchmove',function(e){
+            e.preventDefault()
+            var pos = e.changedTouches[0]
+            item.style.left = pos.clientX + 'px';
+            item.style.top = pos.clientY  + 'px';
+            
+        })
     })
+    
+
+    var poy = 0;
+
+
     item.addEventListener('touchend' , function(e){
         var el = e.changedTouches[0]
         const cart = document.getElementById('cart_img')
@@ -196,6 +233,9 @@ async function Fall(){
             if(e.cancelable)
                 e.preventDefault()
             item.remove();
+            ChongAnh()
+            SoundCart();
+
             score++;
             
         }else{
@@ -208,7 +248,22 @@ async function Fall(){
     item.style.display = 'none'
     await sleep(wait)
     item.style.display = 'block'
-    ItemFallDown(14, item, rand_speed)
 
+
+        
+
+
+    function ItemFallDown(i , item , speed ){
+        var int = setInterval(  function() {
+            item.style.top = i + 'px';
+            i+=speed;
+            if(i >= 700) {
+                clearInterval(int)
+                item.remove()
+            } 
+    
+        }, 70);
+    }
+    ItemFallDown(0 , item, rand_speed)
 }
 

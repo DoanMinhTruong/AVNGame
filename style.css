@@ -39,6 +39,8 @@ body{
 }
 #cart_img{
     z-index: 1;
+    height: auto;
+    width: 10%;
 }
 
 .item_fall{
@@ -49,6 +51,7 @@ body{
 .cart_image{
     z-index: 2;
     position: absolute;
+    height: auto;
     width: 3.5%;
 }
 .invisible{
@@ -60,7 +63,9 @@ body{
 
         width : 100px;
     }
-    
+    #cart_img{
+        width: 12%;
+    }
 }
 @media only screen and (max-width: 992px) {
     .item_fall{
@@ -75,6 +80,9 @@ body{
     .cart_image{
         width: 5%;
     }
+    #cart_img{
+        width: 17%;
+    }
 }
 @media only screen and (max-width: 768px) {
     .item_fall{
@@ -88,4 +96,11 @@ body{
     .cart_image{
         width: 8%;
     }
+    #cart_img{
+        width: 20%;
+    }
 }
+
+/*  */
+/*  */
+/*  */

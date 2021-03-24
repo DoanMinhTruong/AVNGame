@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 *{
     padding : 0;
     margin : 0;
@@ -34,14 +41,17 @@ body{
     text-align: center;
     position: absolute;
     bottom: 2%;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
     display: inline-flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 #cart_img{
     z-index: 1;
     height: auto;
     width: 10%;
-    webkitw
 }
 
 .item_fall{

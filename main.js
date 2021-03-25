@@ -164,14 +164,87 @@ async function Fall(){
     item.className = 'item_fall'
     item.src = products[rand_id]
     item.style.left = rand_left + '%';
-    item.style.transition = 'all 0.25s'
+    item.style.transition = 'all 0.5s';
     board.appendChild(item)
 
-    item.draggable = 'true'
-    item.addEventListener('dragstart' , function(){
-        item.classList.add('invisible')
-    })
+
+
+    item.style.display = 'none'
+    await sleep(wait)
+    item.style.display = 'block'
+    var auto
+    function ItemFallDown(i , item , speed ){
+            auto = setInterval(  function() {
+            item.style.top = i + 'px';
+            i+=speed;
+            var hei = document.documentElement.clientHeight
+            if(i >= hei - (hei * 1 /100)) {
+                clearInterval(auto)
+                item.remove()
+            } 
+
+        }, 70);
+    }
+    ItemFallDown( 0, item, rand_speed)
+
+
+    var int
+
+
+    var mousePosition;
+    var offset = [0,0];
+    var isDown = false;
+    var isMove = false
+   
+    item.addEventListener('mousedown', function(e) {
+        clearInterval(auto);
+        isDown = true;
+        offset = [
+            item.offsetLeft - e.clientX,
+            item.offsetTop - e.clientY
+        ];
+    } , false);
     
+    item.addEventListener('mousemove', function(event) {
+        if (isDown) {
+            item.style.transition = ''
+            isMove = true;
+            event.preventDefault()
+            clearInterval(int)
+            mousePosition = {
+                x : event.clientX,
+                y : event.clientY
+            };
+            item.style.left = (mousePosition.x + offset[0]) + 'px';
+            item.style.top  = (mousePosition.y + offset[1]) + 'px';
+            drag(event)
+            item.style.transition = 'all 0.5s'  
+        }
+    },false);
+
+
+    board.addEventListener('mouseup', function(e) {
+        if(isMove){
+            isDown = false;
+            function ItemFallDown(i , item , speed ){
+                int = setInterval(  function() {
+                    item.style.top = i + 'px';
+                    i+=speed;
+                    var hei = document.documentElement.clientHeight
+                    if(i >= hei - (hei *  1/100)) {
+                        clearInterval(int)
+                        item.remove()
+                    } 
+    
+                }, 50);
+            }
+            ItemFallDown( mousePosition.y + offset[1], item, rand_speed)
+        }
+        isMove = false;
+    },false);
+    
+    
+
 
     const allCart = document.getElementById('cart')
 
@@ -191,7 +264,7 @@ async function Fall(){
         var x2 = x1 + cart.getBoundingClientRect().width
         var y1 = cart.getBoundingClientRect().y
         var y2 = y1 + cart.getBoundingClientRect().width
-        if(e.clientX >= x1-(item.x* (20/100)) && e.clientX <= x2+(item.x* (20/100))  && e.clientY >= y1-(item.y* (20/100)) && e.clientY <= y2+(item.y* (20/100))){
+        if(e.clientX >= x1-(item.x* (5/100)) && e.clientX <= x2+(item.x* (5/100))  && e.clientY >= y1-(item.y* (5/100)) && e.clientY <= y2+(item.y* (5/100))){
             e.preventDefault()
             item.remove();
             ChongAnh()
@@ -199,77 +272,121 @@ async function Fall(){
             score++;
             last_score.innerText = score;
             
-        }else{
-            item.classList.remove('invisible')
         }
     }
-    item.addEventListener('dragend' , function(e){
-        drag(e);
-
-    })
+    
     
 
 
-    item.addEventListener('touchstart',function(e){
-        e.preventDefault()
-        item.addEventListener('touchmove',function(e){
-            e.preventDefault()
-            var pos = e.changedTouches[0]
-            item.style.left = pos.clientX + 'px';
-            item.style.top = pos.clientY  + 'px';
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var int2 
+    var mousePosition2;
+    var offset2 = [0,0];
+    var isDown2 = false;
+    var isMove2 = false
+
+
+    item.addEventListener('touchstart', function(e) {
+        clearInterval(auto);
+        isDown2 = true
+    } , false);
+
+    item.addEventListener('touchmove',function(e){
+            console.log('touch move')
+            if(isDown2){
+                e.preventDefault()
+                clearInterval(int2);
+                isMove2 = true
+                mousePosition2 = {
+                    x : e.changedTouches[0].clientX,
+                    y : e.changedTouches[0].clientY
+                };
+                item.style.transition = ''
+                item.style.left = mousePosition2.x   + 'px';
+                item.style.top = mousePosition2.y   +'px';
+                
+            }
         })
-    })
+
     
 
-    var poy = 0;
 
 
     item.addEventListener('touchend' , function(e){
         var el = e.changedTouches[0]
-        const cart = document.getElementById('cart_img')
-        var x1 = cart.getBoundingClientRect().x
-        var x2 = x1 + cart.getBoundingClientRect().width
-        var y1 = cart.getBoundingClientRect().y
-        var y2 = y1 + cart.getBoundingClientRect().width
-        if(e.cancelable)
-                e.preventDefault()
-        if(el.clientX >= x1-(item.x* (20/100)) && el.clientX <= x2+(item.x* (20/100))  && el.clientY >= y1-(item.y* (20/100)) && el.clientY <= y2+(item.y* (20/100))){
-            
-            item.remove();
-            ChongAnh()
-            SoundCart();
+                const cart = document.getElementById('cart_img')
+                var x1 = cart.getBoundingClientRect().x
+                var x2 = x1 + cart.getBoundingClientRect().width
+                var y1 = cart.getBoundingClientRect().y
+                var y2 = y1 + cart.getBoundingClientRect().width
+                if(e.cancelable)
+                        e.preventDefault()
+                if(el.clientX >= x1-(item.x* (5/100)) && el.clientX <= x2+(item.x* (5/100))  && el.clientY >= y1-(item.y* (5/100)) && el.clientY <= y2+(item.y* (5/100))){
+                    item.remove();
+                    ChongAnh()
+                    SoundCart();
+                    score++;
+                    last_score.innerText = score;
+                    
+                }
+            if(isMove2){
+                item.style.transition = 'all 0.5s'
 
-            score++;
-            last_score.innerText = score;
-            
-        }else{
-            item.classList.remove('invisible')
-        }
+                function ItemFallDown(i , item , speed ){
+                    int2 = setInterval(  function() {
+                        item.style.top = i + 'px';
+                        i+=speed;
+                        var hei = document.documentElement.clientHeight
+                        if(i >= hei - (hei *  1/100)) {
+                            clearInterval(int2)
+                            item.remove()
+                        } 
+        
+                    }, 50);
+                }
+                ItemFallDown( mousePosition2.y + offset2[1], item, rand_speed)
+            }
+            isMove2 = false;
+
     })
 
 
 
-    item.style.display = 'none'
-    await sleep(wait)
-    item.style.display = 'block'
+    
 
 
         
 
 
-    function ItemFallDown(i , item , speed ){
-        var int = setInterval(  function() {
-            item.style.top = i + 'px';
-            i+=speed;
-            var hei = document.documentElement.clientHeight
-            if(i >= hei - (hei * 25 /100)) {
-                clearInterval(int)
-                item.remove()
-            } 
+    // function ItemFallDown(i , item , speed ){
+    //     var int = setInterval(  function() {
+    //         item.style.top = i + 'px';
+    //         i+=speed;
+    //         var hei = document.documentElement.clientHeight
+    //         if(i >= hei - (hei * 25 /100)) {
+    //             clearInterval(int)
+    //             item.remove()
+    //         } 
     
-        }, 70);
-    }
-    ItemFallDown(0 , item, rand_speed)
+    //     }, 70);
+    // }
+    // ItemFallDown(0 , item, rand_speed)
 }
 

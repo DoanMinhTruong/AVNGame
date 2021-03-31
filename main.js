@@ -23,7 +23,6 @@ function removeElementsByClass(className){
         elements[0].parentNode.removeChild(elements[0]);
     }
 }
-
 close.addEventListener('click', function(){
     closeGame();
 })
@@ -48,36 +47,40 @@ function startGame(){
         board.style.display = 'block'
         for(let i = 0 ;i< 70; i++)
             Fall()
-        CountDown(19, timer, function(){
+        CountDown(1, timer, function(){
             board.style.display = 'none';
             removeElementsByClass('item_fall')
             const result = document.createElement('div')
-            result.className = 'result m-3 row justify-content-center'
-            if(score < 15){
+            result.className = 'result row justify-content-center'
+            if(score < 0){
                 const result_content = document.createElement('div')
-                result_content.className = 'result-child m-5 p-3 col-md-6 col-xs-10 position-absolute bg-white text-center'
+                result_content.className = 'result-child col-11 col-sm-9 col-md-6 col-lg-6 col-xl-4 position-absolute bg-white text-center'
                 result_content.innerHTML = `
-                            <div class='h2 text-danger'>
-                                RẤT TIẾC CHƯA VƯỢT QUA MINI GAME
+                            <div class='h3 fw-bolder text-danger'>
+                                RẤT TIẾC <br> CHƯA VƯỢT QUA MINI GAME
                             </div>
                             <div class='result_title h4'>
                                 Bạn đã thất bại mini game với số điểm <h1>`+score+ `/15</h1>  Hãy cố gắng lần sau!
                             </div>
                 `
                 const again = document.createElement('button')
-                again.className = 'btn btn-info h4 p-1'
+                again.className = 'btn btn-info h4 px-3'
                 again.id = 'again'
                 again.innerText = 'Chơi lại'
                 again.style.margin = '3%'
-
                 const conti = document.createElement('button')
-                conti.className = 'btn btn-warning h4 p-1'
+                conti.className = 'btn btn-warning h4 px-3'
                 conti.id = 'conti'
                 conti.innerText = 'Tiếp tục'
                 conti.style.margin = '3%'
-
                 result_content.appendChild(again)
                 result_content.appendChild(conti)
+                const banner = document.createElement('div')
+                banner.className = 'row'
+                const im = document.createElement('img')
+                im.src='./resized/deco1.png'
+                banner.appendChild(im)
+                result_content.appendChild(banner)
                 SoundLose();
                 again.addEventListener('click' ,function(){
                     score = 0;
@@ -93,21 +96,27 @@ function startGame(){
                 result.appendChild(result_content)
             }else{
                 const result_content = document.createElement('div')
-                result_content.className ='result-child m-5 p-3 col-md-6 col-xs-10 position-absolute bg-white text-center'
+                result_content.className ='result-child col-11 col-sm-9 col-md-6 col-lg-6 col-xl-5 position-absolute bg-white text-center'
                 result_content.innerHTML = `
-                    <div class='h1 text-danger'>CHÚC MỪNG</div>
-                    <div class='result_header'>
+                    <div class='h1 fw-bolder text-danger'>CHÚC MỪNG</div>
+                    <div class='result_header px-3'>
                     Bạn đã chiến thắng mini game với số điểm <h2>`+score+`/15</h2>  Phần thưởng cho bạn là mã giảm giá 20k dành cho đơn hàng trên 100k tại gian hàng chính hảng của Ajinomoto trên Tiki, Shopee, Lazada
                     </div>
-                    <div class='voucher my-2 mx-5 py-2 bg-danger text-white h2 '>VR1208</div>
-                    <div class='result_footer h4 fw-bold'>Hãy lưu lại và mua sắm nhé!</div>
+                    <div class='voucher my-1 mx-5 py-1 bg-danger text-white h2 '>VR1208</div>
+                    <div class='result_footer h3 fw-bolder'>Hãy lưu lại và mua sắm nhé!</div>
                 `
                 const conti = document.createElement('button')
                 conti.id = 'conti'
                 conti.className = 'btn btn-primary'
                 conti.innerText = 'Tiếp tục tham quan'
-                conti.style.margin = '4%'
+                conti.style.margin = '2% 0'
                 result_content.appendChild(conti)
+                const banner = document.createElement('div')
+                banner.className = 'row'
+                const im = document.createElement('img')
+                im.src='./resized/deco1.png'
+                banner.appendChild(im)
+                result_content.appendChild(banner)
                 result.appendChild(result_content)
                 SoundWin();
             }
@@ -131,8 +140,8 @@ async function Fall(){
     var rand_speed = (Math.random() * 10) + 5   
     var wait = Math.random() * 50000 + 500 
     var item = document.createElement('img')
-    item.loading = 'lazy'
     item.className = 'item_fall py-1'
+    item.draggable = "true";
     item.src = products[rand_id]
     item.style.left = rand_left + '%';
     item.style.transition = 'all 0.5s';
@@ -140,6 +149,12 @@ async function Fall(){
     item.style.display = 'none'
     await sleep(wait)
     item.style.display = 'block'
+
+
+    const xOffset = item.clientWidth / 2;
+    const yOffset = item.clientHeight / 2;
+
+
     var auto
     function ItemFallDown(i , item , speed ){
             auto = setInterval(  function() {
@@ -166,24 +181,23 @@ async function Fall(){
             item.offsetTop - e.clientY
         ];
     } , false);
-    item.addEventListener('mousemove', function(event) {
+    window.addEventListener('mousemove', function(event) {
+        
         if (isDown) {
             item.style.transition = ''
             isMove = true;
             event.preventDefault()
             clearInterval(int)
-            mousePosition = {
-                x : event.clientX,
-                y : event.clientY
-            };
-            item.style.left = (mousePosition.x + offset[0]) + 'px';
-            item.style.top  = (mousePosition.y + offset[1]) + 'px';
-            drag(event)
-            item.style.transition = 'all 0.5s'  
+            item.style.left = `${event.clientX - xOffset}px`;
+            item.style.top = `${event.clientY - yOffset}px`;
         }
+            
+            if(!isMove) item.style.transition = 'all 0.5s'  
     },false);
     board.addEventListener('mouseup', function(e) {
         if(isMove){
+            drag(event)
+
             isDown = false;
             function ItemFallDown(i , item , speed ){
                 int = setInterval(  function() {
@@ -196,7 +210,7 @@ async function Fall(){
                     } 
                 }, 50);
             }
-            ItemFallDown( mousePosition.y + offset[1], item, rand_speed)
+            ItemFallDown( e.clientY - yOffset, item, rand_speed)
         }
         isMove = false;
     },false);
@@ -224,23 +238,15 @@ async function Fall(){
             last_score.innerText = score;
         }
     }
-    
-    
-
-
-
     var int2 
     var mousePosition2;
     var offset2 = [0,0];
     var isDown2 = false;
     var isMove2 = false
-
-
     item.addEventListener('touchstart', function(e) {
         clearInterval(auto);
         isDown2 = true
     } , false);
-
     item.addEventListener('touchmove',function(e){
             console.log('touch move')
             if(isDown2){
@@ -257,11 +263,6 @@ async function Fall(){
                 
             }
         })
-
-    
-
-
-
     item.addEventListener('touchend' , function(e){
         var el = e.changedTouches[0]
                 const cart = document.getElementById('cart_img')
@@ -299,27 +300,5 @@ async function Fall(){
             isMove2 = false;
 
     })
-
-
-
-    
-
-
-        
-
-
-    // function ItemFallDown(i , item , speed ){
-    //     var int = setInterval(  function() {
-    //         item.style.top = i + 'px';
-    //         i+=speed;
-    //         var hei = document.documentElement.clientHeight
-    //         if(i >= hei - (hei * 25 /100)) {
-    //             clearInterval(int)
-    //             item.remove()
-    //         } 
-    
-    //     }, 70);
-    // }
-    // ItemFallDown(0 , item, rand_speed)
 }
 

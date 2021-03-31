@@ -1,15 +1,10 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
 
 *{
     padding : 0;
     margin : 0;
 }
 html, body{
+    height: 100%;
     overflow: hidden;
 }
 body{
@@ -22,6 +17,31 @@ body{
     overflow: hidden;
     scrollbar-width:  none;
 }
+/* Notice */
+.notice{
+    margin-top: 10%;
+    padding: 0;
+}
+.notice_content{
+    padding : 3% 10%;
+}
+.notice_title{
+    color: #ff5151;
+}
+
+
+/* End notice */
+/* Result child */
+
+.result-child{
+    margin: 10%;
+    padding : 0;
+    padding-top: 15px;
+}
+
+
+
+/*  */
 .count3{
     position: absolute;
     height: 100%;
@@ -32,8 +52,6 @@ body{
 }
 .board{
     display: none;
-    
-    
 }
 .board_timer{
     margin-top: 5px;
@@ -81,23 +99,6 @@ body{
     opacity: 0.5 ;
 }
 
-.notice , .result-child {
-    box-shadow: 0px 0px 0px 10px #50C878; 
-
-    /* box-shadow: 0px 0px 0px 10px #FC5185; */
-    transition: box-shadow 0.3s linear;
-    margin: 0.5em; /* Increased margin since the box-shado expands outside the element, like outline */
-  }
-  .notice:hover { 
-      box-shadow: 0px 0px 0px 13px #FC5185; 
-      /* box-shadow: 0px 0px 0px 10px #50C878;  */
-
-    }
-  .result-child:hover {
-       box-shadow: 0px 0px 0px 13px #FC5185; 
-      /* box-shadow: 0px 0px 0px 10px #50C878;  */
-
-    }
 
 .result{
     margin-top: 20%;

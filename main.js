@@ -109,7 +109,7 @@ function startGame(){
                 conti.id = 'conti'
                 conti.className = 'btn btn-primary'
                 conti.innerText = 'Tiếp tục tham quan'
-                conti.style.margin = '2% 0'
+                conti.style.margin = '1% 0'
                 result_content.appendChild(conti)
                 const banner = document.createElement('div')
                 banner.className = 'row'

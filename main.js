@@ -47,12 +47,12 @@ function startGame(){
         board.style.display = 'block'
         for(let i = 0 ;i< 70; i++)
             Fall()
-        CountDown(1, timer, function(){
+        CountDown(19, timer, function(){
             board.style.display = 'none';
             removeElementsByClass('item_fall')
             const result = document.createElement('div')
             result.className = 'result row justify-content-center'
-            if(score < 0){
+            if(score < 15){
                 const result_content = document.createElement('div')
                 result_content.className = 'result-child col-11 col-sm-9 col-md-6 col-lg-6 col-xl-4 position-absolute bg-white text-center'
                 result_content.innerHTML = `

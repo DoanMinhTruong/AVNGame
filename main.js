@@ -54,7 +54,7 @@ function startGame(){
             result.className = 'result row justify-content-center'
             if(score < 15){
                 const result_content = document.createElement('div')
-                result_content.className = 'result-child col-11 col-sm-9 col-md-6 col-lg-6 col-xl-4 position-absolute bg-white text-center'
+                result_content.className = 'result-child border border-danger col-11 col-sm-9 col-md-6 col-lg-6 col-xl-4 position-absolute bg-white text-center'
                 result_content.innerHTML = `
                             <div class='h3 fw-bolder text-danger'>
                                 RẤT TIẾC <br> CHƯA VƯỢT QUA MINI GAME
@@ -96,7 +96,7 @@ function startGame(){
                 result.appendChild(result_content)
             }else{
                 const result_content = document.createElement('div')
-                result_content.className ='result-child col-11 col-sm-9 col-md-6 col-lg-6 col-xl-5 position-absolute bg-white text-center'
+                result_content.className ='result-child border border-danger col-11 col-sm-9 col-md-6 col-lg-6 col-xl-5 position-absolute bg-white text-center'
                 result_content.innerHTML = `
                     <div class='h1 fw-bolder text-danger'>CHÚC MỪNG</div>
                     <div class='result_header px-3'>

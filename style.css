@@ -113,9 +113,9 @@ body{
 .notice, .result-child, .board_timer {
     position: absolute;
     top: -100%;
-    -webkit-animation: slide 0.7s forwards;
+    -webkit-animation: slide 0.5s forwards;
     -webkit-animation-delay: 0.3s;
-    animation: slide 0.7s forwards;
+    animation: slide 0.5s forwards;
     animation-delay: 0.3s;
 }
 

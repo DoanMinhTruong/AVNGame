@@ -15,7 +15,7 @@ html, body{
 }
 body{
     height: 100%;
-    background-image: url('./resized/background.jpg');
+    background-color: grey;
     background-size: cover;
     background-attachment:fixed;
     overscroll-behavior-x: contain;
@@ -54,7 +54,7 @@ body{
     width: 100%;
     top: 30%;
     font-size: 140px;
-    text-shadow: 3px 3px 0px #F2A063;
+    text-shadow: 3px 3px 0px #f1954e;
 }
 .board{
     display: none;
@@ -68,6 +68,7 @@ body{
     width: 35%;
     left:35%;
     opacity: 0.96;
+    border: 5px dashed rgb(241, 90, 90);
 }
 #cart{
     pointer-events: none;
@@ -156,7 +157,7 @@ body{
 /*  */
 /*  */
 /*  */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1200px ) {
     .item_fall{
         width : 100px;
     }
@@ -167,6 +168,9 @@ body{
     }
 }
 @media only screen and (max-width: 992px) {
+    .notice_content{
+        padding : 3% 3%;
+    }
     .item_fall{
         
         width : 90px;
@@ -189,6 +193,9 @@ body{
     .item_fall{
         width : 80px;
     }
+    .notice_content{
+        padding : 3% 3%;
+    }
     .board_timer{
         position: absolute;
         width: 70%;
@@ -203,3 +210,54 @@ body{
     height: auto;
     }
 }
+
+.item_fall{
+    animation: app-logo-spin infinite 2.75s linear;
+    border-radius: 20%;
+
+}
+.item_fall:hover{
+    background-color: rgba(250 , 250, 250, 0.12);
+    border-radius: 50%;
+    opacity: 1;
+}
+
+@keyframes app-logo-spin {
+    /* from {transform: rotateY(45deg);}
+	to {transform: rotateY(225deg);} */
+    25%{
+        opacity: 0;
+        transform: rotate(-10deg);
+    }
+    50%{
+        opacity: 0.5;
+        transform: rotate(0deg);
+
+    }
+    75%{
+        opacity: 1;
+        transform: rotate(10deg);
+    }
+  }
+
+
+
+@media only screen and (max-height: 414px) {
+    
+    .item_fall{
+        width : 65px;
+    }
+    .cart_image{
+        height: 20%;
+    }
+    #cart_img{
+        /* -webkit-logical-width: 30%; */
+        width: 13%;
+        height: auto;
+    }
+    .notice, .result-child{
+        margin-top : 3%;
+    }
+}
+  
+  

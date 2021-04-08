@@ -5,16 +5,20 @@ const timer = document.querySelector('.timer')
 const again = document.getElementById('again')
 const start = document.getElementById('start')
 const last_score = document.querySelector('.score')
+
+const Cart = new Audio('./sounds/bounce.mp3')
+Cart.volume = 0.1;
+
 function SoundWin(){
     const Win = new Audio('./sounds/wow.mp3')
     Win.play();
 }
 function SoundLose(){
     const Lose = new Audio('./sounds/lose.mp3')
+    Lose.volume = 0.5;
     Lose.play();
 }
 function SoundCart(){
-    const Cart = new Audio('./sounds/bounce.mp3')
     Cart.play();
 }
 function removeElementsByClass(className){
@@ -45,7 +49,7 @@ function startGame(){
         count3.style.display = 'none'
         count3.innerText = '3'
         board.style.display = 'block'
-        for(let i = 0 ;i< 70; i++)
+        for(let i = 0 ;i< 50; i++)
             Fall()
         CountDown(19, timer, function(){
             board.style.display = 'none';
@@ -129,14 +133,14 @@ start.addEventListener('click' , function(e){
 })
 const path = './resized/'
 const products = []
-for (let i = 0 ; i <= 76 ; i++)
+for (let i = 0 ; i <= 12 ; i++)
     products.push(path  + i + '.png')
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 async function Fall(){
-    var rand_id = Math.floor(Math.random() * 76)
-    var rand_left = Math.floor(Math.random() * 50) + 25
+    var rand_id = Math.floor(Math.random() * 12)
+    var rand_left = Math.floor(Math.random() * 60) + 20
     var rand_speed = (Math.random() * 10) + 5   
     var wait = Math.random() * 50000 + 500 
     var item = document.createElement('img')
@@ -144,7 +148,7 @@ async function Fall(){
     item.draggable = "true";
     item.src = products[rand_id]
     item.style.left = rand_left + '%';
-    item.style.transition = 'all 0.5s';
+    item.style.transition = 'all 1s';
     board.appendChild(item)
     item.style.display = 'none'
     await sleep(wait)
@@ -157,17 +161,17 @@ async function Fall(){
 
     var auto
     function ItemFallDown(i , item , speed ){
-            auto = setInterval(  function() {
+            auto = setInterval( async function() {
             item.style.top = i + 'px';
             i+=speed;
             var hei = document.documentElement.clientHeight
             if(i >= hei - (hei * 1 /100)) {
                 clearInterval(auto)
-                item.remove()
+                item.remove();
             } 
         }, 70);
     }
-    ItemFallDown( 0, item, rand_speed)
+    ItemFallDown( 50, item, rand_speed)
     var int
     var mousePosition;
     var offset = [0,0];
@@ -196,7 +200,7 @@ async function Fall(){
     },false);
     board.addEventListener('mouseup', function(e) {
         if(isMove){
-            drag(event)
+            drag(e)
 
             isDown = false;
             function ItemFallDown(i , item , speed ){
@@ -229,7 +233,7 @@ async function Fall(){
         var x2 = x1 + cart.getBoundingClientRect().width
         var y1 = cart.getBoundingClientRect().y
         var y2 = y1 + cart.getBoundingClientRect().width
-        if(e.clientX >= x1-(item.x* (5/100)) && e.clientX <= x2+(item.x* (5/100))  && e.clientY >= y1-(item.y* (5/100)) && e.clientY <= y2+(item.y* (5/100))){
+        if(e.clientX >= x1-(item.x* (10/100)) && e.clientX <= x2+(item.x* (10/100))  && e.clientY >= y1-(item.y* (10/100)) && e.clientY <= y2+(item.y* (10/100))){
             e.preventDefault()
             item.remove();
             ChongAnh()

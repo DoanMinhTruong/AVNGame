@@ -6,12 +6,19 @@
 html, body{
     height: 100%;
     overflow: hidden;
+    cursor: none;
 }
 .text-danger{
     color: #ff5151;
 }
 .border-danger{
     border: 2px solid #ff5151; 
+}
+#close{
+    cursor: none;
+}
+#start{
+    cursor: none;
 }
 body{
     height: 100%;
@@ -27,6 +34,7 @@ body{
 .notice{
     margin-top: 10%;
     padding: 0;
+
 }
 .notice_content{
     padding : 3% 10%;
@@ -92,9 +100,15 @@ body{
 
 .item_fall{
     position: absolute;
-    cursor: pointer;
-    width: 110px;
+    width: 120px;
     height: auto;
+
+    padding-top: 90px;
+    
+    /* background-color: black; */
+    background-image: url('./resized/twin4.gif');
+    background-size: contain;
+    background-position: top;
 }
 .cart_image{
     z-index: 2;
@@ -191,7 +205,7 @@ body{
 }
 @media only screen and (max-width: 768px) {
     .item_fall{
-        width : 80px;
+        width : 110px;
     }
     .notice_content{
         padding : 3% 3%;
@@ -214,23 +228,18 @@ body{
 .item_fall{
     animation: app-logo-spin infinite 2.75s linear;
     border-radius: 20%;
+}
 
-}
-.item_fall:hover{
-    background-color: rgba(250 , 250, 250, 0.12);
-    border-radius: 50%;
-    opacity: 1;
-}
 
 @keyframes app-logo-spin {
     /* from {transform: rotateY(45deg);}
 	to {transform: rotateY(225deg);} */
     25%{
-        opacity: 0;
+        /* opacity: 0; */
         transform: rotate(-10deg);
     }
     50%{
-        opacity: 0.5;
+        opacity: 0.7;
         transform: rotate(0deg);
 
     }

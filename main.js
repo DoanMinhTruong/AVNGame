@@ -144,11 +144,14 @@ async function Fall(){
     var rand_speed = (Math.random() * 10) + 5   
     var wait = Math.random() * 50000 + 500 
     var item = document.createElement('img')
-    item.className = 'item_fall py-1'
+    item.className = 'item_fall my-1'
     item.draggable = "true";
     item.src = products[rand_id]
     item.style.left = rand_left + '%';
     item.style.transition = 'all 1s';
+    
+
+
     board.appendChild(item)
     item.style.display = 'none'
     await sleep(wait)

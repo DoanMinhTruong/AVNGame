@@ -261,12 +261,12 @@ async function Fall(){
                 clearInterval(int2);
                 isMove2 = true
                 mousePosition2 = {
-                    x : e.changedTouches[0].clientX,
-                    y : e.changedTouches[0].clientY
+                    x : e.changedTouches[0].clientX - 50 ,
+                    y : e.changedTouches[0].clientY - 120
                 };
                 item.style.transition = ''
                 item.style.left = mousePosition2.x   + 'px';
-                item.style.top = mousePosition2.y   +'px';
+                item.style.top = mousePosition2.y  +'px';
                 
             }
         })
